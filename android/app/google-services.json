@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "219699767278",
+    "project_id": "attendmesaikat",
+    "storage_bucket": "attendmesaikat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219699767278:android:41bdab724c6ad4226290ff",
+        "android_client_info": {
+          "package_name": "com.saikat.attendme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChFP8GyQTIRgvrgdiNLo29hMpfsm5FBRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

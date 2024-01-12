@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="412" height="892" viewBox="0 0 412 892">
+  <defs>
+    <clipPath id="clip-Google_Pixel_7_Pro_6_Pro_1">
+      <rect width="412" height="892"/>
+    </clipPath>
+  </defs>
+  <g id="Google_Pixel_7_Pro_6_Pro_1" data-name="Google Pixel 7 Pro, 6 Pro – 1" clip-path="url(#clip-Google_Pixel_7_Pro_6_Pro_1)">
+    <rect width="412" height="892" fill="rgba(255,255,255,0.22)"/>
+    <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="205" cy="149" rx="205" ry="149" transform="matrix(1, -0.017, 0.017, 1, 184.362, -176.315)" fill="#b0d1f1"/>
+    <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="91.5" cy="122" rx="91.5" ry="122" transform="translate(332 15)" fill="#4c98de"/>
+  </g>
+</svg>

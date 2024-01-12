@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBSTU47t7AzW2DvgmZ7DZeqElqFY_HC8gw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>219699767278</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.saikat.attendme</string>
+	<key>PROJECT_ID</key>
+	<string>attendmesaikat</string>
+	<key>STORAGE_BUCKET</key>
+	<string>attendmesaikat.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:219699767278:ios:f4e393c5772bf6766290ff</string>
+</dict>
+</plist>
