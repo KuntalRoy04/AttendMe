@@ -23,7 +23,7 @@ Future<bool> performFacultySignUp(String password, String firstName,
       'email': email,
       'full_name': '$firstName$lastName'
     });
-
+    
     DocumentSnapshot docSnapshot = await facultyDoc.get();
 
     if (docSnapshot.exists) {

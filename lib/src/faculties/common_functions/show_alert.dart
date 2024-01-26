@@ -15,7 +15,11 @@ showAlertDialog(BuildContext context, DocumentReference documentReference, Docum
       });
       successToast("Class created successfully");
       (context.mounted)?
-      Navigator.of(context).popUntil((route) => route.settings.name == 'navigationFaculty'):'';// Close dialog
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        'navigationFaculty', // Replace with the name of the desired route
+            (route) => false,
+      ):'';
+      // Navigator.pushReplacementNamed(context, 'navigationFaculty'):'';
       // Perform desired action for "Yes" choice
     },
   );

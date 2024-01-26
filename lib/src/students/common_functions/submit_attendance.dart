@@ -9,11 +9,9 @@ import 'is_location_in_area.dart';
 
 Future<void> submitAttendance(
     context,
-    TextEditingController attendanceEnController,
-    TextEditingController attendanceCodeController,
+    String enNum,
+    String secretCode ,
     developerMode) async {
-  String enNum = attendanceEnController.text;
-  String secretCode = attendanceCodeController.text;
   Position? currentLocation = await getCurrentLocation();
   if (enNum.isEmpty ||
       enNum.length != 14 ||
@@ -46,35 +44,36 @@ Future<void> submitAttendance(
       await documentRefSecretCode.set({
         enNum: documentRefUsersSnapshot.get('full_name'),
       }, SetOptions(merge: true)).then((enrollmentDocRef) {
-        attendanceEnController.clear();
-        attendanceCodeController.clear();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(const Duration(seconds: 3), () {
-              // Close the dialog after 3 seconds
-              Navigator.of(context).pop();
-            });
-            return const AlertDialog(
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 50,
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Attendance Marked",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        // attendanceEnController.clear();
+        // attendanceCodeController.clear();
+        // showDialog(
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     Future.delayed(const Duration(seconds: 3), () {
+        //       // Close the dialog after 3 seconds
+        //       Navigator.of(context).pop();
+        //     });
+        //     return const AlertDialog(
+        //       content: Column(
+        //         mainAxisSize: MainAxisSize.min,
+        //         children: [
+        //           Icon(
+        //             Icons.check_circle,
+        //             color: Colors.green,
+        //             size: 50,
+        //           ),
+        //           SizedBox(height: 16),
+        //           Text(
+        //             "Attendance Marked",
+        //             textAlign: TextAlign.center,
+        //             style: TextStyle(fontSize: 16),
+        //           ),
+        //         ],
+        //       ),
+        //     );
+        //   },
+        // );
+        successToast("Attendance Marked");
       }).catchError((error) {
         dangerToast('Could not upload Attendance!');
       });

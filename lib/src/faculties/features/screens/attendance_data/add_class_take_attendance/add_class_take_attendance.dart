@@ -1,7 +1,9 @@
 import 'package:attendme/src/general/show_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../common_functions/generate_secret_code.dart';
 import '../../../../common_functions/show_alert.dart';
 
 class AddClassTakeAttendanceScreen extends StatefulWidget {
@@ -55,8 +57,16 @@ class _AddClassTakeAttendanceScreenState
                           if (docSnapshot.exists) {
                             context.mounted?
                             showAlertDialog(context, documentReference, docSnapshot, subjectValue!):'';
-                            await documentReference.update({
-                              subjectValue!: docSnapshot.get(subjectValue!) + 1
+
+                            String newSecretCode = generateSecretCode(8);
+                            FirebaseFirestore.instance.collection('secretCodes').doc(newSecretCode).set({});
+
+                            CollectionReference faculties = FirebaseFirestore.instance.collection('faculties');
+                            final prefs = await SharedPreferences.getInstance();
+                            String? id = prefs.getString('facultyId');
+                            await faculties.doc(id).collection('secret_codes').doc(newSecretCode).set({
+                              'codes': newSecretCode,
+                              'time': FieldValue.serverTimestamp(),
                             });
                           } else {
                             dangerToast("Something went wrong!");

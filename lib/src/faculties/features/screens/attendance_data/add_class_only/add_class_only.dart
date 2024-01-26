@@ -54,9 +54,6 @@ class _AddClassOnlyScreenState
                           if (docSnapshot.exists) {
                             context.mounted?
                             showAlertDialog(context, documentReference, docSnapshot, subjectValue!):'';
-                            await documentReference.update({
-                              subjectValue!: docSnapshot.get(subjectValue!) + 1
-                            });
                           } else {
                             dangerToast("Something went wrong!");
                           }

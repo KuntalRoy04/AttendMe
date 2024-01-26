@@ -1,4 +1,4 @@
-import 'package:attendme/src/students/common_functions/submit_attendance.dart';
+import 'package:attendme/src/general/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,14 +58,15 @@ class _AttendanceInputState extends State<AttendanceInput> {
                   ),
                   const SizedBox(height: 30),
                   ElevatedButton(onPressed: () async {
-                    Future<bool> developerMode = Future.value(false);
-                    setState(() {
-                      isLoading = true;
-                    });
-                    submitAttendance(context, attendanceEnController, attendanceCodeController, await developerMode);
-                    setState(() {
-                      isLoading = false;
-                    });
+                    warningToast("This feature has been deprecated. Scan QR instead");
+                    // Future<bool> developerMode = Future.value(false);
+                    // setState(() {
+                    //   isLoading = true;
+                    // });
+                    // submitAttendance(context, attendanceEnController.text, attendanceCodeController.text, await developerMode);
+                    // setState(() {
+                    //   isLoading = false;
+                    // });
                   }, child: isLoading
                       ? const Padding(
                     padding: EdgeInsets.all(20.0),
@@ -83,7 +84,9 @@ class _AttendanceInputState extends State<AttendanceInput> {
                   Text("or", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.black),),
                   const Divider(thickness: 2,),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.pushNamed(context, 'scanQr');
+                    },
                     child: const Icon(
                       Icons.qr_code_2_rounded,
                       size:150

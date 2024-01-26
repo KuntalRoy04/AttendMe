@@ -17,7 +17,7 @@ Future<bool> performSignUp(String ennum, String password, String firstName,
           'last_name': lastName,
           'phone': phone,
           'email': email,
-          'full_name': '$firstName$lastName'
+          'full_name': '$firstName $lastName'
         });
 
         DocumentSnapshot docSnapshot = await usersDoc.get();
