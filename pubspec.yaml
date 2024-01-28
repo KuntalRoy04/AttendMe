@@ -1,4 +1,4 @@
-name: attendme
+name: Attendme
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -82,7 +82,6 @@ flutter:
   assets:
      - assets/logos/attendme_logo.svg
      - assets/logos/bg.svg
-     - assets/bgs/login_bg.svg
      - assets/students/morning_sky.jpg
      - assets/students/afternoon_sky.jpg
      - assets/students/evening_sky.png

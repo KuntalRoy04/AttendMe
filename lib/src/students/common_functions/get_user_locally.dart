@@ -1,4 +1,4 @@
-import 'package:attendme/src/students/common_functions/user_model.dart';
+import 'package:Attendme/src/students/common_functions/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<User?> getUserLocally() async {

@@ -1,4 +1,4 @@
-import 'package:attendme/src/before_login/common_functions/faculty_sign_up/perform_faculty_sign_up.dart';
+import 'package:Attendme/src/before_login/common_functions/faculty_sign_up/perform_faculty_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -137,7 +137,7 @@ class FacultySignUpPage extends StatelessWidget {
                               lastNameController.text,
                               phoneController.text,
                               emailController.text)?(context.mounted)?Navigator.pushNamedAndRemoveUntil(
-                              context, 'navigationFaculty', (route) => false):'':dangerToast("Something went wrong!");
+                              context, 'navigationFaculty', (route) => false):'':dangerToast(context, "Something went wrong!");
                         }
                       },
                       style: ButtonStyle(

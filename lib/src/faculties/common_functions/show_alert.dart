@@ -13,7 +13,7 @@ showAlertDialog(BuildContext context, DocumentReference documentReference, Docum
       await documentReference.update({
         subjectValue: docSnapshot.get(subjectValue) + 1
       });
-      successToast("Class created successfully");
+      successToast(context, "Class created successfully");
       (context.mounted)?
       Navigator.of(context).pushNamedAndRemoveUntil(
         'navigationFaculty', // Replace with the name of the desired route

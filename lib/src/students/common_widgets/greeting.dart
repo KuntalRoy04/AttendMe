@@ -1,5 +1,5 @@
-import 'package:attendme/src/faculties/common_functions/get_faculty_locally.dart';
-import 'package:attendme/src/students/common_functions/get_user_locally.dart';
+import 'package:Attendme/src/faculties/common_functions/get_faculty_locally.dart';
+import 'package:Attendme/src/students/common_functions/get_user_locally.dart';
 import 'package:flutter/material.dart';
 import '../constants/text_strings.dart';
 
@@ -33,7 +33,7 @@ class Greeting extends StatelessWidget {
         } else if (snapshot.hasError) {
           return const Text('Error fetching user name'); // Handle errors
         } else {
-          return const CircularProgressIndicator(); // Show loading indicator
+          return Container(); // Show loading indicator
         }
       },
     );

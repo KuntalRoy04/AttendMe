@@ -10,13 +10,19 @@ class FSettingsScreen extends StatelessWidget{
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("FSettingsScreen"),
-          ElevatedButton(
-              onPressed: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.setBool('isFacultyLoggedIn', false);
-                Navigator.pushNamed(context, 'loginDashboard');
-            }, child: Text("Logout"))
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('isFacultyLoggedIn', false);
+                      Navigator.pushNamed(context, 'loginDashboard');
+                  }, child: Text("Logout")),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:attendme/src/before_login/common_widgets/faculty_login_page.dart';
+import 'package:Attendme/src/before_login/common_widgets/faculty_login_page.dart';
 import 'package:flutter/material.dart';
 
 class FacultyLoginScreen extends StatelessWidget {

@@ -1,4 +1,5 @@
-import 'package:attendme/src/students/common_functions/get_user_locally.dart';
+import 'package:Attendme/src/general/show_toast.dart';
+import 'package:Attendme/src/students/common_functions/get_user_locally.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
@@ -36,24 +37,30 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((Barcode scanData) async {
+    try{
+      controller.scannedDataStream.listen((Barcode scanData) async {
+      // controller.stopCamera();
       if (kDebugMode) {
         print('Scanned data: ${scanData.code}');
       }
       Vibration.vibrate();
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        'navigationStudent',
-            (route) => false,
-      );
+      controller.pauseCamera();
       String? enNum = await getEnNum();
-      String? secretCode = scanData.code;
-      // final bool developerMode = await FlutterJailbreakDetection.developerMode;
-      final Future<bool> developerMode = Future.value(false);
-      (context.mounted)?
-      await submitAttendance(context, enNum!, secretCode!, developerMode):'';
+      final bool developerMode = await FlutterJailbreakDetection.developerMode;
+      if(context.mounted){
+        await submitAttendance(context, enNum!, scanData.code!, developerMode);
+        context.mounted? Navigator.pop(context):'';
+      }
     });
+    }
+    catch(e){
+      if (kDebugMode) {
+        print("Error: $e");
+      }
+      dangerToast(context, "QR not supported");
+      context.mounted? Navigator.pop(context):'';
+    }
   }
-
 
   @override
   void dispose() {

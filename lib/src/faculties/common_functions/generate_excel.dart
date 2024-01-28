@@ -1,8 +1,7 @@
 import 'dart:io';
+import 'package:Attendme/src/general/show_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:excel/excel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -35,7 +34,7 @@ Future<Map<String, dynamic>?> fetchData(String documentId) async {
 }
 
 
-Future<void> writeToExcel(String documentId, Map<String, dynamic>? data) async {
+Future<void> writeToExcel(BuildContext context, String documentId, Map<String, dynamic>? data) async {
   // Ensure that documentId is not empty or null
   if (documentId.isNotEmpty) {
     // Check if data is not null before proceeding
@@ -53,45 +52,21 @@ Future<void> writeToExcel(String documentId, Map<String, dynamic>? data) async {
         sheet.appendRow([key, value.toString()]);
       });
 
-      // Save to the "Android/media" directory
-      Directory? externalStorageDirectory = await getExternalStorageDirectory();
-      String excelPath = '${externalStorageDirectory?.path}/Android/media/$documentId.xlsx';
+      // Save to the "/storage/emulated/0/Download" directory
+      Directory? downloadsDirectory = Directory("/storage/emulated/0/Download");
+      String excelPath = '${downloadsDirectory.path}/$documentId.xlsx';
 
       List<int> onValue = excel.encode() ?? []; // Provide an empty list as a default value if onValue is null
       File(excelPath)
         ..createSync(recursive: true)
         ..writeAsBytesSync(onValue);
 
-      Fluttertoast.showToast(
-        msg: 'Excel file saved at: $excelPath',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
-        fontSize: 16.0,
-      );
+      successToast(context, "Excel file saved at: $excelPath");
     } else {
-      Fluttertoast.showToast(
-        msg: 'Error: Data is null. Cannot write to Excel!',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.yellow,
-        textColor: Colors.black,
-        fontSize: 16.0,
-      );
+      dangerToast(context, "Error: Data is null. Cannot write to Excel!");
     }
   } else {
-    Fluttertoast.showToast(
-      msg: 'Error: Document ID is empty or null.!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 2,
-      backgroundColor: Colors.yellow,
-      textColor: Colors.black,
-      fontSize: 16.0,
-    );
+    dangerToast(context, "Something went wrong");
   }
 }
 

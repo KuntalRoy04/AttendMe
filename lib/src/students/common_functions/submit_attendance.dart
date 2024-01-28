@@ -1,17 +1,13 @@
-import 'package:attendme/src/students/common_functions/get_user_locally.dart';
+import 'package:Attendme/src/students/common_functions/get_user_locally.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../general/show_toast.dart';
 import 'get_current_location.dart';
 import 'is_location_in_area.dart';
 
-Future<void> submitAttendance(
-    context,
-    String enNum,
-    String secretCode ,
-    developerMode) async {
+Future<bool> submitAttendance(
+    context, String enNum, String secretCode, developerMode) async {
   Position? currentLocation = await getCurrentLocation();
   if (enNum.isEmpty ||
       enNum.length != 14 ||
@@ -19,17 +15,15 @@ Future<void> submitAttendance(
       !isLocationInArea(currentLocation!.latitude, currentLocation.longitude) ||
       await developerMode) {
     if (await developerMode) {
-      warningToast(
+      warningToast(context,
           'Turn off Developer Mode because this allows location spoofing');
     } else if (enNum.isEmpty || enNum.length != 14 || secretCode.isEmpty) {
-      dangerToast('Enter correct Enrolment number or secret code!');
+      dangerToast(context, 'Enter correct Enrolment number or secret code!');
     } else if (!isLocationInArea(
         currentLocation!.latitude, currentLocation.longitude)) {
-      dangerToast('You are not in college!');
+      dangerToast(context, 'You are not in college!');
     }
-    // setState(() {
-    //   isLoading = false;
-    // });
+    return false;
   } else {
     // Get a reference to the document
     DocumentReference documentRefSecretCode =
@@ -73,12 +67,18 @@ Future<void> submitAttendance(
         //     );
         //   },
         // );
-        successToast("Attendance Marked");
+        // successToastAfterAttendance("Attendance Marked");
+        successToast(context, "Attendance Marked");
+        // successToast(context, "Attendance Marked");
+        return true;
       }).catchError((error) {
-        dangerToast('Could not upload Attendance!');
+        dangerToast(context, "Could not upload Attendance!");
+        return false;
       });
+      return false;
     } else {
-      warningToast('Incorrect Code!');
+      warningToast(context, 'Incorrect Code!');
+      return false;
     }
   }
 }

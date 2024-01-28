@@ -1,4 +1,4 @@
-import 'package:attendme/src/students/common_functions/user_model.dart';
+import 'package:Attendme/src/students/common_functions/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> storeUserLocally(User user) async {
@@ -11,4 +11,5 @@ Future<void> storeUserLocally(User user) async {
   await prefs.setString('email', user.email);
   await prefs.setString('password', user.password);
   await prefs.setString('fullName', user.fullName);
+  await prefs.setInt('loginTime', DateTime.now().millisecondsSinceEpoch);
 }

@@ -1,4 +1,4 @@
-import 'package:attendme/src/faculties/features/navigation/navigation_faculty.dart';
+import 'package:Attendme/src/faculties/features/navigation/navigation_faculty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
       if(await checkLoginStatus()){
         if (!context.mounted) return;
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const NavigationStudent()));
@@ -30,7 +30,25 @@ class SplashScreen extends StatelessWidget{
     });
 
     return Scaffold(
-        body: Center(child: SvgPicture.asset(attendMeLogo))
+        body: Stack(
+          children: [
+            Center(child: SvgPicture.asset(attendMeLogo)),
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 100.0),
+                      child: Text("Developed by Saikat", style: TextStyle(color: Colors.black),),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        )
     );
   }
 

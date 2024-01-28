@@ -1,5 +1,5 @@
-import 'package:attendme/src/faculties/common_functions/faculty_model.dart';
-import 'package:attendme/src/students/common_functions/user_model.dart';
+import 'package:Attendme/src/faculties/common_functions/faculty_model.dart';
+import 'package:Attendme/src/students/common_functions/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

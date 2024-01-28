@@ -1,4 +1,4 @@
-import 'package:attendme/src/before_login/common_functions/sign_up/perform_sign_up.dart';
+import 'package:Attendme/src/before_login/common_functions/sign_up/perform_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -171,7 +171,7 @@ class StudentSignUpPage extends StatelessWidget {
                                   ? ''
                                   : Navigator.pushNamedAndRemoveUntil(
                                       context, 'navigationStudent', (route) => false)
-                              : dangerToast("Something went wrong!");
+                              : dangerToast(context, "Something went wrong!");
                         }
                         else{
                           Fluttertoast.showToast(

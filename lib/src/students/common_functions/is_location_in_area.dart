@@ -1,14 +1,10 @@
 bool isLocationInArea(double latitude, double longitude) {
-  // Replace these values with the coordinates of the particular area
-  // double areaLatitude = 22.687411702663145;
-  // double areaLongitude = 88.46009886931323;
 
-  double areaLatitude = 22.56008058963318;
-  double areaLongitude = 88.4900667024951;
+  double areaLatitude = 22.56008058963318; //This one is University's actual coordinates
+  double areaLongitude = 88.4900667024951; //This one is University's actual coordinates
 
-  // Set a threshold for latitude and longitude (adjust as needed)
-  // double threshold = 0.00099964005; //This one is University's actual coordinates
-  double threshold = 20;
+  // double threshold = 0.00099964005; //This one is University's actual threshold
+  double threshold = 20; //Modified threshold for testing
 
   // Check if the current location is within the area
   return (latitude >= areaLatitude - threshold &&

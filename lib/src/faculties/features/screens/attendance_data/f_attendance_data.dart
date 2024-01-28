@@ -165,7 +165,7 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                             GestureDetector(
                               onTap: () async {
                                 var documentData = await fetchData(documentIDs[index]);
-                                await writeToExcel(documentIDs[index], documentData);
+                                await writeToExcel(context, documentIDs[index], documentData);
                               },
                               child: const Icon(Icons.download_rounded),
                             ),

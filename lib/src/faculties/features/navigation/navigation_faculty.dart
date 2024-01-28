@@ -1,5 +1,5 @@
-import 'package:attendme/src/faculties/features/screens/attendance_data/f_attendance_data.dart';
-import 'package:attendme/src/faculties/features/screens/settings/f_settings.dart';
+import 'package:Attendme/src/faculties/features/screens/attendance_data/f_attendance_data.dart';
+import 'package:Attendme/src/faculties/features/screens/settings/f_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 

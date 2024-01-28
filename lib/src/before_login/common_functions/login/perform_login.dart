@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 
 import '../../../students/common_functions/store_user_locally.dart';
 import '../../../students/common_functions/user_model.dart';

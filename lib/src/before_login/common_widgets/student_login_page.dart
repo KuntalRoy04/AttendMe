@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../common_functions/login/perform_login.dart';
 import '../constants/image_strings/image_strings.dart';
 import '../constants/text_strings/text_strings.dart';

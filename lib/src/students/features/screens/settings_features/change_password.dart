@@ -1,4 +1,4 @@
-import 'package:attendme/src/general/show_toast.dart';
+import 'package:Attendme/src/general/show_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -107,10 +107,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 await docRef.update({
                                   'password': newPasswordController.text
                                 });
-                                successToast("Password Changed Successfully");
+                                successToast(context, "Password Changed Successfully");
                                 (context.mounted)?Navigator.of(context).pop():'';
                               }else{
-                                dangerToast("Enter correct information");
+                                dangerToast(context, "Enter correct information");
                               }
                             },
                             child: const Text("Reset Password")

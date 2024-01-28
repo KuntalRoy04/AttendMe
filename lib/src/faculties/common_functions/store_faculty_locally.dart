@@ -1,4 +1,4 @@
-import 'package:attendme/src/faculties/common_functions/faculty_model.dart';
+import 'package:Attendme/src/faculties/common_functions/faculty_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> storeFacultyLocally(Faculty faculty) async {

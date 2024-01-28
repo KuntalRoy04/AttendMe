@@ -1,5 +1,5 @@
-import 'package:attendme/src/students/constants/image_strings.dart';
-import 'package:attendme/src/students/constants/text_strings.dart';
+import 'package:Attendme/src/students/constants/image_strings.dart';
+import 'package:Attendme/src/students/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common_widgets/attendance_input.dart';

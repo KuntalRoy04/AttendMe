@@ -1,7 +1,7 @@
-import 'package:attendme/src/general/show_toast.dart';
+import 'package:Attendme/src/general/show_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:attendme/src/faculties/common_functions/show_alert.dart';
+import 'package:Attendme/src/faculties/common_functions/show_alert.dart';
 
 class AddClassOnlyScreen extends StatefulWidget {
   const AddClassOnlyScreen({super.key});
@@ -55,10 +55,10 @@ class _AddClassOnlyScreenState
                             context.mounted?
                             showAlertDialog(context, documentReference, docSnapshot, subjectValue!):'';
                           } else {
-                            dangerToast("Something went wrong!");
+                            dangerToast(context, "Something went wrong!");
                           }
                         } else {
-                          dangerToast("Select all the fields");
+                          dangerToast(context, "Select all the fields");
                         }
                       },
                       child: const Icon(

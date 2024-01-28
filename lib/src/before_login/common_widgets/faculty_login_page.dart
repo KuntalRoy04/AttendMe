@@ -1,4 +1,4 @@
-import 'package:attendme/src/before_login/common_functions/faculty_login/perform_faculty_login.dart';
+import 'package:Attendme/src/before_login/common_functions/faculty_login/perform_faculty_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -73,7 +73,7 @@ class FacultyLoginPage extends StatelessWidget{
                   ElevatedButton(
                     onPressed: () async {
                       await performFacultyLogin(emailController.text, passwordController.text)?(context.mounted)?
-                      Navigator.pushNamed(context, 'navigationFaculty'):'':dangerToast('Incorrect Login Details');
+                      Navigator.pushNamed(context, 'navigationFaculty'):'':dangerToast(context, 'Incorrect Login Details');
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),

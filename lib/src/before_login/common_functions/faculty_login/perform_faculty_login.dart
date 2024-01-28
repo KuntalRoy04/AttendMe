@@ -1,4 +1,4 @@
-import 'package:attendme/src/faculties/common_functions/faculty_model.dart';
+import 'package:Attendme/src/faculties/common_functions/faculty_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 

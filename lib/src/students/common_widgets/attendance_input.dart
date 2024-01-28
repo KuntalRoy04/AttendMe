@@ -1,6 +1,12 @@
-import 'package:attendme/src/general/show_toast.dart';
+import 'package:Attendme/src/general/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../common_functions/get_user_locally.dart';
+import '../common_functions/submit_attendance.dart';
+import '../features/screens/attendance/scan_qr.dart';
 
 class AttendanceInput extends StatefulWidget {
   const AttendanceInput({super.key});
@@ -13,6 +19,7 @@ class _AttendanceInputState extends State<AttendanceInput> {
   TextEditingController attendanceEnController = TextEditingController();
   TextEditingController attendanceCodeController = TextEditingController();
   bool isLoading = false;
+  String? scannedCode;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +29,7 @@ class _AttendanceInputState extends State<AttendanceInput> {
           const SizedBox(height: 200),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30)
-            ),
+                color: Colors.white, borderRadius: BorderRadius.circular(30)),
             child: Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
               child: Column(
@@ -33,11 +38,12 @@ class _AttendanceInputState extends State<AttendanceInput> {
                     height: 4,
                     width: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(200),
-                      color: Colors.grey
-                    ),
+                        borderRadius: BorderRadius.circular(200),
+                        color: Colors.grey),
                   ),
-                  const SizedBox(height: 35,),
+                  const SizedBox(
+                    height: 35,
+                  ),
                   TextField(
                     controller: attendanceEnController,
                     keyboardType: TextInputType.number,
@@ -46,51 +52,88 @@ class _AttendanceInputState extends State<AttendanceInput> {
                       FilteringTextInputFormatter.digitsOnly,
                     ],
                     decoration: const InputDecoration(
-                        label: Text("Enrolment Number", style: TextStyle(fontSize: 18),)
-                    ),
+                        label: Text(
+                      "Enrolment Number",
+                      style: TextStyle(fontSize: 18),
+                    )),
                   ),
                   const SizedBox(height: 30),
                   TextField(
                     controller: attendanceCodeController,
                     decoration: const InputDecoration(
-                        label: Text("Secret Code", style: TextStyle(fontSize: 18),)
-                    ),
+                        label: Text(
+                      "Secret Code",
+                      style: TextStyle(fontSize: 18),
+                    )),
                   ),
                   const SizedBox(height: 30),
-                  ElevatedButton(onPressed: () async {
-                    warningToast("This feature has been deprecated. Scan QR instead");
-                    // Future<bool> developerMode = Future.value(false);
-                    // setState(() {
-                    //   isLoading = true;
-                    // });
-                    // submitAttendance(context, attendanceEnController.text, attendanceCodeController.text, await developerMode);
-                    // setState(() {
-                    //   isLoading = false;
-                    // });
-                  }, child: isLoading
-                      ? const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Set the color
-                      strokeWidth: 4,
-                    ),
-                  )
-                      : const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Submit'),
-                  )
+                  ElevatedButton(
+                      onPressed: () async {
+                        warningToast(context,
+                            "This feature has been deprecated. Scan QR instead");
+                        // Future<bool> developerMode = Future.value(false);
+                        // setState(() {
+                        //   isLoading = true;
+                        // });
+                        // submitAttendance(context, attendanceEnController.text, attendanceCodeController.text, await developerMode);
+                        // setState(() {
+                        //   isLoading = false;
+                        // });
+                      },
+                      child: isLoading
+                          ? const Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.blue), // Set the color
+                                strokeWidth: 4,
+                              ),
+                            )
+                          : const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text('Submit'),
+                            )),
+                  const SizedBox(
+                    height: 15,
                   ),
-                  const SizedBox(height: 15,),
-                  Text("or", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.black),),
-                  const Divider(thickness: 2,),
+                  Text(
+                    "or",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(color: Colors.black),
+                  ),
+                  const Divider(
+                    thickness: 2,
+                  ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, 'scanQr');
+                    onTap: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      int loginTimestamp = prefs.getInt('loginTime') ?? 0;
+
+                      DateTime loginTime =
+                          DateTime.fromMillisecondsSinceEpoch(loginTimestamp);
+                      DateTime currentTime = DateTime.now();
+                      if (currentTime.difference(loginTime).inHours >= 1) {
+                        context.mounted
+                            ? Navigator.pushNamed(context, 'scanQr')
+                            : '';
+                      } else {
+                        final bool developerMode =
+                            await FlutterJailbreakDetection.developerMode;
+                        developerMode
+                            ? context.mounted
+                                ? dangerToast(context,
+                                    "You logged in so early, please wait ${60 - currentTime.difference(loginTime).inMinutes} more minutes and also turn off developer mode.")
+                                : ''
+                            : context.mounted
+                                ? dangerToast(context,
+                                    "You logged in so early, please wait ${60 - currentTime.difference(loginTime).inMinutes} more minutes.")
+                                : '';
+                      }
                     },
-                    child: const Icon(
-                      Icons.qr_code_2_rounded,
-                      size:150
-                    ),
+                    child: const Icon(Icons.qr_code_2_rounded, size: 150),
                   ),
                 ],
               ),
