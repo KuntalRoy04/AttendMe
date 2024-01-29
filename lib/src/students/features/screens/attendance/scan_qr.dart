@@ -18,16 +18,51 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    double boxSize = 200.0;
     return Scaffold(
       appBar: null,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          QRView(
+            key: qrKey,
+            onQRViewCreated: _onQRViewCreated,
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(80.0),
+                  child: Text(
+                    "Scan AttendMe QR",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: Colors.white),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: const Color(0xFF1C5D99),
+                      width: 3.0,
+                    ),
+                  ),
+                  width: boxSize,
+                  height: boxSize,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(100.0),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Cancel")),
+                )
+              ],
             ),
           ),
         ],
@@ -37,28 +72,29 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    try{
+    try {
       controller.scannedDataStream.listen((Barcode scanData) async {
-      // controller.stopCamera();
-      if (kDebugMode) {
-        print('Scanned data: ${scanData.code}');
-      }
-      Vibration.vibrate();
-      controller.pauseCamera();
-      String? enNum = await getEnNum();
-      final bool developerMode = await FlutterJailbreakDetection.developerMode;
-      if(context.mounted){
-        await submitAttendance(context, enNum!, scanData.code!, developerMode);
-        context.mounted? Navigator.pop(context):'';
-      }
-    });
-    }
-    catch(e){
+        // controller.stopCamera();
+        if (kDebugMode) {
+          print('Scanned data: ${scanData.code}');
+        }
+        Vibration.vibrate();
+        controller.pauseCamera();
+        String? enNum = await getEnNum();
+        final bool developerMode = await FlutterJailbreakDetection.developerMode;
+        // final bool developerMode = await Future.value(false);
+        if (context.mounted) {
+          await submitAttendance(
+              context, enNum!, scanData.code!, developerMode);
+          context.mounted ? Navigator.pop(context) : '';
+        }
+      });
+    } catch (e) {
       if (kDebugMode) {
         print("Error: $e");
       }
       dangerToast(context, "QR not supported");
-      context.mounted? Navigator.pop(context):'';
+      context.mounted ? Navigator.pop(context) : '';
     }
   }
 

@@ -119,7 +119,8 @@ class _AttendanceInputState extends State<AttendanceInput> {
                         context.mounted
                             ? Navigator.pushNamed(context, 'scanQr')
                             : '';
-                      } else {
+                      }
+                      else {
                         final bool developerMode =
                             await FlutterJailbreakDetection.developerMode;
                         developerMode
