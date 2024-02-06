@@ -54,11 +54,12 @@ dependencies:
   qr_flutter: ^4.1.0
   excel: ^3.0.0
   path_provider: ^2.1.2
-  qr_code_scanner: ^1.0.1
   vibration: ^1.8.4
   url_launcher: ^6.2.4
   open_file: ^3.3.2
   file_picker: ^6.1.1
+  mobile_scanner: ^4.0.0
+  flutter_barcode_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:

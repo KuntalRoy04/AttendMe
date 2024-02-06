@@ -1,12 +1,12 @@
 import 'package:Attendme/src/general/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common_functions/get_user_locally.dart';
 import '../common_functions/submit_attendance.dart';
-import '../features/screens/attendance/scan_qr.dart';
 
 class AttendanceInput extends StatefulWidget {
   const AttendanceInput({super.key});
@@ -20,6 +20,16 @@ class _AttendanceInputState extends State<AttendanceInput> {
   TextEditingController attendanceCodeController = TextEditingController();
   bool isLoading = false;
   String? scannedCode;
+
+  Future<void> scanQr() async{
+    final qrCode = await FlutterBarcodeScanner.scanBarcode('#1C5D99', 'Cancel', false, ScanMode.QR);
+    scannedCode = qrCode.toString();
+    String? roll = await getRoll();
+    final bool developerMode = await FlutterJailbreakDetection.developerMode;
+    // final bool developerMode = await Future.value(false);
+    context.mounted?await submitAttendance(
+        context, roll!, scannedCode!, developerMode):'';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,9 +126,7 @@ class _AttendanceInputState extends State<AttendanceInput> {
                           DateTime.fromMillisecondsSinceEpoch(loginTimestamp);
                       DateTime currentTime = DateTime.now();
                       if (currentTime.difference(loginTime).inHours >= 1) {
-                        context.mounted
-                            ? Navigator.pushNamed(context, 'scanQr')
-                            : '';
+                        scanQr();
                       }
                       else {
                         final bool developerMode =

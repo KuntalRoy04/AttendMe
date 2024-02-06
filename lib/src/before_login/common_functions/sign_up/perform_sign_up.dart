@@ -5,13 +5,14 @@ import '../../../students/common_functions/store_user_locally.dart';
 import '../../../students/common_functions/user_model.dart';
 
 Future<bool> performSignUp(String ennum, String password, String firstName,
-    String lastName, String phone, String email) async {
+    String lastName, String phone, String email, String roll) async {
       try {
         // Query Firestore to find the user with the provided userId
         DocumentReference usersDoc = FirebaseFirestore.instance.collection(
             'users').doc(ennum);
         await usersDoc.set({
           'ennum': ennum,
+          'roll': roll,
           'password': password,
           'first_name': firstName,
           'last_name': lastName,
@@ -35,7 +36,8 @@ Future<bool> performSignUp(String ennum, String password, String firstName,
                 phone: docSnapshot.get('phone'),
                 email: docSnapshot.get('email'),
                 password: docSnapshot.get('password'),
-                fullName: docSnapshot.get('full_name')
+                fullName: docSnapshot.get('full_name'),
+                roll: docSnapshot.get('roll')
             );
             await storeUserLocally(user);
             return true;

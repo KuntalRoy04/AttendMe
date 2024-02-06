@@ -9,7 +9,6 @@ import 'package:Attendme/src/faculties/features/screens/attendance_data/add_clas
 import 'package:Attendme/src/faculties/features/screens/attendance_data/add_class_take_attendance/add_class_take_attendance.dart';
 import 'package:Attendme/src/students/features/navigation/navigation_student.dart';
 import 'package:Attendme/src/students/features/screens/attendance/attendance.dart';
-import 'package:Attendme/src/students/features/screens/attendance/scan_qr.dart';
 import 'package:Attendme/src/students/features/screens/profile/profile.dart';
 import 'package:Attendme/src/students/features/screens/settings/settings.dart';
 import 'package:Attendme/src/students/features/screens/settings_features/change_password.dart';
@@ -44,7 +43,6 @@ void main() async{
       'facultySignUp': (context) => const FacultySignUpScreen(),
       'addClassOnly': (context) => const AddClassOnlyScreen(),
       'addClassTakeAttendance': (context) => const AddClassTakeAttendanceScreen(),
-      'scanQr': (context) => QRCodeScreen()
     },
   ));
 }

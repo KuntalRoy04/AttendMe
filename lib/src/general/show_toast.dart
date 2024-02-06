@@ -18,7 +18,7 @@ void successToast(BuildContext context, String message) {
           ),
         ),
       ),
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 10),
     ),
   );
 }
@@ -41,7 +41,7 @@ void dangerToast(BuildContext context, String message) {
           ),
         ),
       ),
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 5),
     ),
   );
 }
@@ -64,7 +64,7 @@ void warningToast(BuildContext context, String message) {
           ),
         ),
       ),
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 5),
     ),
   );
 }

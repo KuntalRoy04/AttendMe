@@ -131,13 +131,14 @@ class FacultySignUpPage extends StatelessWidget {
                       onPressed: () async {
                         if (passwordController.text ==
                             confirmPasswordController.text) {
-                          await performFacultySignUp(
-                              passwordController.text,
-                              firstNameController.text,
-                              lastNameController.text,
-                              phoneController.text,
-                              emailController.text)?(context.mounted)?Navigator.pushNamedAndRemoveUntil(
-                              context, 'navigationFaculty', (route) => false):'':dangerToast(context, "Something went wrong!");
+                          warningToast(context, 'Faculty Signup not available');
+                          // await performFacultySignUp(
+                          //     passwordController.text,
+                          //     firstNameController.text,
+                          //     lastNameController.text,
+                          //     phoneController.text,
+                          //     emailController.text)?(context.mounted)?Navigator.pushNamedAndRemoveUntil(
+                          //     context, 'navigationFaculty', (route) => false):'':dangerToast(context, "Something went wrong!");
                         }
                       },
                       style: ButtonStyle(

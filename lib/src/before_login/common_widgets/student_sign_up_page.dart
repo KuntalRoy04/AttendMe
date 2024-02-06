@@ -10,6 +10,7 @@ import '../constants/text_strings/text_strings.dart';
 
 class StudentSignUpPage extends StatelessWidget {
   final TextEditingController enController = TextEditingController();
+  final TextEditingController rollController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
@@ -107,16 +108,31 @@ class StudentSignUpPage extends StatelessWidget {
                           width: 20), // Add space between text fields
                       Expanded(
                         child: TextField(
-                          controller: emailController,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@_.]'))
+                          controller: rollController,
+                          keyboardType: TextInputType.number,
+                          enableInteractiveSelection: false,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.deny(RegExp(r"[ ]")), // Disallow pasting any characters
                           ],
                           decoration: const InputDecoration(
-                            labelText: "Email",
+                            labelText: "Class Roll",
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    controller: emailController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@_.]'))
+                    ],
+                    decoration: const InputDecoration(
+                        labelText: 'Email',
+                        prefixIcon: Icon(Icons.email, color: Color(0xFF1C5D99))
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -166,7 +182,8 @@ class StudentSignUpPage extends StatelessWidget {
                                   firstNameController.text,
                                   lastNameController.text,
                                   phoneController.text,
-                                  emailController.text)
+                                  emailController.text,
+                                  rollController.text)
                               ? (!context.mounted)
                                   ? ''
                                   : Navigator.pushNamedAndRemoveUntil(

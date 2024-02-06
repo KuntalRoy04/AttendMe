@@ -11,5 +11,6 @@ Future<void> storeUserLocally(User user) async {
   await prefs.setString('email', user.email);
   await prefs.setString('password', user.password);
   await prefs.setString('fullName', user.fullName);
+  await prefs.setString('roll', user.roll);
   await prefs.setInt('loginTime', DateTime.now().millisecondsSinceEpoch);
 }

@@ -82,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // SvgPicture.asset(attendMeLogo, width: 70, height: 70,),
-                                Text("You attended: 70% classes", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
+                                Text("Attendance Percentage: Coming soon", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),),
                               ],
                             )
                           ],

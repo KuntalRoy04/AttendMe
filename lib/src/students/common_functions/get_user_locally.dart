@@ -10,8 +10,9 @@ Future<User?> getUserLocally() async {
   String? email = prefs.getString('email');
   String? password = prefs.getString('password');
   String? fullName = prefs.getString('fullName');
+  String? roll = prefs.getString('roll');
 
-  if (enNum != null && firstName != null && lastName != null && phone != null && email != null && password != null && fullName != null) {
+  if (enNum != null && firstName != null && lastName != null && phone != null && email != null && roll != null && password != null && fullName != null) {
     return User(
         enNum: enNum,
         firstName: firstName,
@@ -19,7 +20,8 @@ Future<User?> getUserLocally() async {
         phone: phone,
         email: email,
         password: password,
-        fullName: fullName
+        fullName: fullName,
+        roll: roll
     );
   } else {
     return null;
@@ -62,5 +64,12 @@ Future<String?> getFullName() async {
   }
 }
 
-
+Future<String?> getRoll() async {
+  User? user = await getUserLocally();
+  if (user != null) {
+    return user.roll;
+  } else {
+    return null;
+  }
+}
 

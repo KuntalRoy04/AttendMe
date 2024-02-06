@@ -48,7 +48,7 @@ Future<void> writeToExcel(BuildContext context, String documentId, Map<String, d
       var sheet = excel['Sheet1'];
 
       // Add headers
-      sheet.appendRow(['Enrolment Number', 'Name']);
+      sheet.appendRow(['Roll Number', 'Name']);
 
       // Add data
       nonNullableData.forEach((key, value) {

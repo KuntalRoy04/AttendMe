@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
 
 import '../../../students/common_functions/store_user_locally.dart';
 import '../../../students/common_functions/user_model.dart';
@@ -23,7 +22,8 @@ Future<bool> performLogin(String ennum, String password) async {
           phone: documentSnapshot.get('phone'),
           email: documentSnapshot.get('email'),
           password: documentSnapshot.get('password'),
-          fullName: documentSnapshot.get('full_name')
+          fullName: documentSnapshot.get('full_name'),
+          roll: documentSnapshot.get('roll')
         );
         await storeUserLocally(user);
         return true;

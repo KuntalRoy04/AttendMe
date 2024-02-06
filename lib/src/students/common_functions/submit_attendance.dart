@@ -7,17 +7,16 @@ import 'get_current_location.dart';
 import 'is_location_in_area.dart';
 
 Future<bool> submitAttendance(
-    context, String enNum, String secretCode, developerMode) async {
+    context, String roll, String secretCode, developerMode) async {
   Position? currentLocation = await getCurrentLocation();
-  if (enNum.isEmpty ||
-      enNum.length != 14 ||
+  if (roll.isEmpty ||
       secretCode.isEmpty ||
       !isLocationInArea(currentLocation!.latitude, currentLocation.longitude) ||
       await developerMode) {
     if (await developerMode) {
       warningToast(context,
           'Turn off Developer Mode because this allows location spoofing');
-    } else if (enNum.isEmpty || enNum.length != 14 || secretCode.isEmpty) {
+    } else if (roll.isEmpty || secretCode.isEmpty) {
       dangerToast(context, 'Enter correct Enrolment number or secret code!');
     } else if (!isLocationInArea(
         currentLocation!.latitude, currentLocation.longitude)) {
@@ -36,7 +35,7 @@ Future<bool> submitAttendance(
     DocumentSnapshot documentRefUsersSnapshot = await documentRefUsers.get();
     if (documentRefSecretCodeSnapshot.exists) {
       await documentRefSecretCode.set({
-        enNum: documentRefUsersSnapshot.get('full_name'),
+        roll: documentRefUsersSnapshot.get('full_name'),
       }, SetOptions(merge: true)).then((enrollmentDocRef) {
         // attendanceEnController.clear();
         // attendanceCodeController.clear();
