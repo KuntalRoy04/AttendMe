@@ -1,10 +1,13 @@
+import 'package:Attendme/src/faculties/features/screens/attendance_data/show_qr.dart';
+import 'package:Attendme/src/general/show_toast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../students/common_widgets/greeting.dart';
 import '../../../../students/constants/image_strings.dart';
 import '../../../../students/constants/text_strings.dart';
 import '../../../common_functions/generate_excel.dart';
+import '../../../common_functions/get_faculty_locally.dart';
 import '../../../common_functions/get_generated_codes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -166,36 +169,32 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                             GestureDetector(
                               onTap: () async {
                                 await Permission.manageExternalStorage.request();
-                                var documentData = await fetchData(documentIDs[index]);
-                                await writeToExcel(context, documentIDs[index], documentData);
+                                // var documentData = await fetchData(documentIDs[index]);
+                                context.mounted?await writeToExcel(context, documentIDs[index], /*documentData*/):'';
                               },
                               child: const Icon(Icons.download_rounded),
                             ),
                             GestureDetector(
                               onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Center(
-                                          child: Text(documentIDs[index])),
-                                      content: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          QrImageView(
-                                            data: documentIDs[index],
-                                            version: QrVersions.auto,
-                                            size: 200,
-                                            backgroundColor: Colors.white,
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                // Navigator.pushNamed(context, 'showQr', arguments: documentIDs[index]);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                    builder: (context) => ShowQR(secretCode: documentIDs[index]))
                                 );
                               },
                               child: const Icon(Icons.qr_code_2_sharp),
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                var secretCodeDocumentReference = FirebaseFirestore.instance.collection('secretCodes').doc(documentIDs[index]);
+                                var facultyProfileSecretCodeDocumentReference = FirebaseFirestore.instance.collection('faculties').doc(await getFacultyId()).collection('secret_codes').doc(documentIDs[index]);
+                                await secretCodeDocumentReference.delete();
+                                await facultyProfileSecretCodeDocumentReference.delete();
+                                context.mounted?dangerToast(context, '${documentIDs[index]} deleted'):'';
+                                setState(() {});
+                              },
+                              child: const Icon(Icons.delete),
                             )
                           ],
                         ),

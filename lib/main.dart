@@ -7,6 +7,7 @@ import 'package:Attendme/src/before_login/features/screens/student_sign_up/stude
 import 'package:Attendme/src/faculties/features/navigation/navigation_faculty.dart';
 import 'package:Attendme/src/faculties/features/screens/attendance_data/add_class_only/add_class_only.dart';
 import 'package:Attendme/src/faculties/features/screens/attendance_data/add_class_take_attendance/add_class_take_attendance.dart';
+import 'package:Attendme/src/faculties/features/screens/attendance_data/show_qr.dart';
 import 'package:Attendme/src/students/features/navigation/navigation_student.dart';
 import 'package:Attendme/src/students/features/screens/attendance/attendance.dart';
 import 'package:Attendme/src/students/features/screens/profile/profile.dart';
@@ -43,6 +44,7 @@ void main() async{
       'facultySignUp': (context) => const FacultySignUpScreen(),
       'addClassOnly': (context) => const AddClassOnlyScreen(),
       'addClassTakeAttendance': (context) => const AddClassTakeAttendanceScreen(),
+      'showQr': (context) => const ShowQR(secretCode: '',),
     },
   ));
 }

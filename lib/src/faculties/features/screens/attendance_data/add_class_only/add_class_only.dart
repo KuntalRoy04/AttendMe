@@ -55,7 +55,7 @@ class _AddClassOnlyScreenState
                             context.mounted?
                             showAlertDialog(context, documentReference, docSnapshot, subjectValue!):'';
                           } else {
-                            dangerToast(context, "Something went wrong!");
+                            context.mounted?dangerToast(context, "Something went wrong!"):'';
                           }
                         } else {
                           dangerToast(context, "Select all the fields");

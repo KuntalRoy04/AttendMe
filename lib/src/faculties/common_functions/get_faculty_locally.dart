@@ -3,7 +3,7 @@ import 'package:Attendme/src/students/common_functions/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<String?> getFacultyLocally() async {
+Future<String?> getFacultyId() async {
   final prefs = await SharedPreferences.getInstance();
   String? facultyId = prefs.getString('facultyId');
   return facultyId;
@@ -44,7 +44,7 @@ Future<String?> getFacultyLocally() async {
 // }
 
 Future<String?> getFacultyFirstName() async {
-  String? facultyId = await getFacultyLocally();
+  String? facultyId = await getFacultyId();
   DocumentReference documentReference =
       FirebaseFirestore.instance.collection('faculties').doc(facultyId);
   DocumentSnapshot documentSnapshot = await documentReference.get();
@@ -52,7 +52,7 @@ Future<String?> getFacultyFirstName() async {
 }
 
 Future<String?> getFacultyLastName() async {
-  String? facultyId = await getFacultyLocally();
+  String? facultyId = await getFacultyId();
   DocumentReference documentReference =
       FirebaseFirestore.instance.collection('faculties').doc(facultyId);
   DocumentSnapshot documentSnapshot = await documentReference.get();
@@ -60,7 +60,7 @@ Future<String?> getFacultyLastName() async {
 }
 
 Future<String?> getFacultyFullName() async {
-  String? facultyId = await getFacultyLocally();
+  String? facultyId = await getFacultyId();
   DocumentReference documentReference =
       FirebaseFirestore.instance.collection('faculties').doc(facultyId);
   DocumentSnapshot documentSnapshot = await documentReference.get();
