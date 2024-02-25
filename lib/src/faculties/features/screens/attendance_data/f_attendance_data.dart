@@ -6,6 +6,7 @@ import '../../../../students/constants/image_strings.dart';
 import '../../../../students/constants/text_strings.dart';
 import '../../../common_functions/generate_excel.dart';
 import '../../../common_functions/get_generated_codes.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FAttendanceDataScreen extends StatefulWidget {
   const FAttendanceDataScreen({super.key});
@@ -164,6 +165,7 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                             Text(documentIDs[index]),
                             GestureDetector(
                               onTap: () async {
+                                await Permission.manageExternalStorage.request();
                                 var documentData = await fetchData(documentIDs[index]);
                                 await writeToExcel(context, documentIDs[index], documentData);
                               },

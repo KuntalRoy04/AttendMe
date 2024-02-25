@@ -7,6 +7,8 @@ class User {
   late String email;
   late String fullName;
   late String roll;
+  late String stream;
+  late String section;
 
   User({
     required this.enNum,
@@ -16,7 +18,9 @@ class User {
     required this.phone,
     required this.email,
     required this.fullName,
-    required this.roll
+    required this.roll,
+    required this.stream,
+    required this.section
   });
 
 }

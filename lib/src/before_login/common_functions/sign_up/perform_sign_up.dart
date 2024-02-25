@@ -5,7 +5,7 @@ import '../../../students/common_functions/store_user_locally.dart';
 import '../../../students/common_functions/user_model.dart';
 
 Future<bool> performSignUp(String ennum, String password, String firstName,
-    String lastName, String phone, String email, String roll) async {
+    String lastName, String phone, String email, String roll, String streamController, String sectionController) async {
       try {
         // Query Firestore to find the user with the provided userId
         DocumentReference usersDoc = FirebaseFirestore.instance.collection(
@@ -18,7 +18,9 @@ Future<bool> performSignUp(String ennum, String password, String firstName,
           'last_name': lastName,
           'phone': phone,
           'email': email,
-          'full_name': '$firstName $lastName'
+          'full_name': '$firstName $lastName',
+          'stream': streamController,
+          'section': sectionController
         });
 
         DocumentSnapshot docSnapshot = await usersDoc.get();
@@ -37,7 +39,9 @@ Future<bool> performSignUp(String ennum, String password, String firstName,
                 email: docSnapshot.get('email'),
                 password: docSnapshot.get('password'),
                 fullName: docSnapshot.get('full_name'),
-                roll: docSnapshot.get('roll')
+                roll: docSnapshot.get('roll'),
+                stream: docSnapshot.get('stream'),
+                section: docSnapshot.get('section')
             );
             await storeUserLocally(user);
             return true;

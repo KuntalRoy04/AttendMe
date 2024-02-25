@@ -34,39 +34,15 @@ Future<bool> submitAttendance(
         await documentRefSecretCode.get();
     DocumentSnapshot documentRefUsersSnapshot = await documentRefUsers.get();
     if (documentRefSecretCodeSnapshot.exists) {
-      await documentRefSecretCode.set({
-        roll: documentRefUsersSnapshot.get('full_name'),
+      var stream = await getStream();
+      var section = await getSection();
+      var attendanceDataCollectionReference =
+          FirebaseFirestore.instance.collection('secretCodes/$secretCode/$stream/$section/students');
+      var studentDocumentReference = attendanceDataCollectionReference.doc(await getEnNum());
+      await studentDocumentReference.set({
+        'name': documentRefUsersSnapshot.get('full_name'),
+        'roll': roll
       }, SetOptions(merge: true)).then((enrollmentDocRef) {
-        // attendanceEnController.clear();
-        // attendanceCodeController.clear();
-        // showDialog(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     Future.delayed(const Duration(seconds: 3), () {
-        //       // Close the dialog after 3 seconds
-        //       Navigator.of(context).pop();
-        //     });
-        //     return const AlertDialog(
-        //       content: Column(
-        //         mainAxisSize: MainAxisSize.min,
-        //         children: [
-        //           Icon(
-        //             Icons.check_circle,
-        //             color: Colors.green,
-        //             size: 50,
-        //           ),
-        //           SizedBox(height: 16),
-        //           Text(
-        //             "Attendance Marked",
-        //             textAlign: TextAlign.center,
-        //             style: TextStyle(fontSize: 16),
-        //           ),
-        //         ],
-        //       ),
-        //     );
-        //   },
-        // );
-        // successToastAfterAttendance("Attendance Marked");
         successToast(context, "Attendance Marked");
         // successToast(context, "Attendance Marked");
         return true;

@@ -23,7 +23,9 @@ Future<bool> performLogin(String ennum, String password) async {
           email: documentSnapshot.get('email'),
           password: documentSnapshot.get('password'),
           fullName: documentSnapshot.get('full_name'),
-          roll: documentSnapshot.get('roll')
+          roll: documentSnapshot.get('roll'),
+          stream: documentSnapshot.get('stream'),
+          section: documentSnapshot.get('section'),
         );
         await storeUserLocally(user);
         return true;

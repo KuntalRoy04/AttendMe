@@ -11,8 +11,12 @@ Future<User?> getUserLocally() async {
   String? password = prefs.getString('password');
   String? fullName = prefs.getString('fullName');
   String? roll = prefs.getString('roll');
+  String? stream = prefs.getString('stream');
+  String? section = prefs.getString('section');
 
-  if (enNum != null && firstName != null && lastName != null && phone != null && email != null && roll != null && password != null && fullName != null) {
+  if (enNum != null && firstName != null && lastName != null
+      && phone != null && email != null && roll != null && password != null
+      && fullName != null && stream != null && section != null) {
     return User(
         enNum: enNum,
         firstName: firstName,
@@ -21,8 +25,19 @@ Future<User?> getUserLocally() async {
         email: email,
         password: password,
         fullName: fullName,
-        roll: roll
+        roll: roll,
+        stream: stream,
+        section: section
     );
+  } else {
+    return null;
+  }
+}
+
+Future<String?> getEnNum() async {
+  User? user = await getUserLocally();
+  if (user != null) {
+    return user.enNum;
   } else {
     return null;
   }
@@ -35,15 +50,6 @@ Future<String?> getFirstName() async {
   } else {
     return null; // No user is logged in
   }
-}
-
-Future<String?> getEnNum() async {
-    User? user = await getUserLocally();
-    if (user != null) {
-      return user.enNum;
-    } else {
-      return null;
-    }
 }
 
 Future<String?> getLastName() async {
@@ -64,6 +70,24 @@ Future<String?> getFullName() async {
   }
 }
 
+Future<String?> getStream() async {
+  User? user = await getUserLocally();
+  if (user != null) {
+    return user.stream;
+  } else {
+    return null;
+  }
+}
+
+Future<String?> getSection() async {
+  User? user = await getUserLocally();
+  if (user != null) {
+    return user.section;
+  } else {
+    return null;
+  }
+}
+
 Future<String?> getRoll() async {
   User? user = await getUserLocally();
   if (user != null) {
@@ -72,4 +96,5 @@ Future<String?> getRoll() async {
     return null;
   }
 }
+
 

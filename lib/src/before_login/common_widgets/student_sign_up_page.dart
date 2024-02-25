@@ -8,17 +8,38 @@ import '../../general/show_toast.dart';
 import '../constants/image_strings/image_strings.dart';
 import '../constants/text_strings/text_strings.dart';
 
-class StudentSignUpPage extends StatelessWidget {
+class StudentSignUpPage extends StatefulWidget {
+
+  const StudentSignUpPage({super.key});
+
+  @override
+  State<StudentSignUpPage> createState() => _StudentSignUpPageState();
+}
+
+class _StudentSignUpPageState extends State<StudentSignUpPage> {
   final TextEditingController enController = TextEditingController();
+
   final TextEditingController rollController = TextEditingController();
+
   final TextEditingController confirmPasswordController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController firstNameController = TextEditingController();
+
   final TextEditingController lastNameController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
 
-  StudentSignUpPage({super.key});
+  final TextEditingController streamController = TextEditingController();
+
+  final TextEditingController sectionController = TextEditingController();
+
+  String? sectionValue = "Section";
+
+  String? streamValue = "Stream";
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +145,57 @@ class StudentSignUpPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DropdownButton<String>(
+                        value: streamValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            streamValue = newValue!;
+                          });
+                        },
+                        underline: Container(
+                          height: 1,
+                          color: Colors.black,
+                        ),
+                        items: const [
+                          DropdownMenuItem(
+                              value: "Stream", child: Text("Stream")),
+                          DropdownMenuItem(value: "cst", child: Text("CST")),
+                          DropdownMenuItem(value: "csit", child: Text("CS-IT")),
+                          DropdownMenuItem(value: "cse", child: Text("CSE")),
+                          DropdownMenuItem(value: "cseaiml", child: Text("CSE-AIML")),
+                          DropdownMenuItem(value: "cseiot", child: Text("CSE-IOT")),
+                        ],
+                      ),
+                      const SizedBox(
+                          width: 20), // Add space between text fields
+                      DropdownButton<String>(
+                        value: sectionValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            sectionValue = newValue!;
+                          });
+                        },
+                        underline: Container(
+                          height: 1,
+                          color: Colors.black,
+                        ),
+                        items: const [
+                          DropdownMenuItem(
+                              value: "Section", child: Text("Section")),
+                          DropdownMenuItem(value: "a", child: Text("A")),
+                          DropdownMenuItem(value: "b", child: Text("B")),
+                          DropdownMenuItem(value: "c", child: Text("C")),
+                          DropdownMenuItem(value: "d", child: Text("D")),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   TextField(
                     controller: emailController,
                     inputFormatters: [
@@ -183,7 +255,9 @@ class StudentSignUpPage extends StatelessWidget {
                                   lastNameController.text,
                                   phoneController.text,
                                   emailController.text,
-                                  rollController.text)
+                                  rollController.text,
+                                  streamValue!,
+                                  sectionValue!)
                               ? (!context.mounted)
                                   ? ''
                                   : Navigator.pushNamedAndRemoveUntil(
