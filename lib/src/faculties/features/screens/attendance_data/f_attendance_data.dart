@@ -168,9 +168,15 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                             Text(documentIDs[index]),
                             GestureDetector(
                               onTap: () async {
-                                await Permission.manageExternalStorage.request();
+                                await Permission.manageExternalStorage
+                                    .request();
                                 // var documentData = await fetchData(documentIDs[index]);
-                                context.mounted?await writeToExcel(context, documentIDs[index], /*documentData*/):'';
+                                context.mounted
+                                    ? await writeToExcel(
+                                        context,
+                                        documentIDs[index], /*documentData*/
+                                      )
+                                    : '';
                               },
                               child: const Icon(Icons.download_rounded),
                             ),
@@ -180,18 +186,30 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                    builder: (context) => ShowQR(secretCode: documentIDs[index]))
-                                );
+                                        builder: (context) => ShowQR(
+                                            secretCode: documentIDs[index])));
                               },
                               child: const Icon(Icons.qr_code_2_sharp),
                             ),
                             GestureDetector(
                               onTap: () async {
-                                var secretCodeDocumentReference = FirebaseFirestore.instance.collection('secretCodes').doc(documentIDs[index]);
-                                var facultyProfileSecretCodeDocumentReference = FirebaseFirestore.instance.collection('faculties').doc(await getFacultyId()).collection('secret_codes').doc(documentIDs[index]);
+                                var secretCodeDocumentReference =
+                                    FirebaseFirestore.instance
+                                        .collection('secretCodes')
+                                        .doc(documentIDs[index]);
+                                var facultyProfileSecretCodeDocumentReference =
+                                    FirebaseFirestore.instance
+                                        .collection('faculties')
+                                        .doc(await getFacultyId())
+                                        .collection('secret_codes')
+                                        .doc(documentIDs[index]);
                                 await secretCodeDocumentReference.delete();
-                                await facultyProfileSecretCodeDocumentReference.delete();
-                                context.mounted?dangerToast(context, '${documentIDs[index]} deleted'):'';
+                                await facultyProfileSecretCodeDocumentReference
+                                    .delete();
+                                context.mounted
+                                    ? dangerToast(context,
+                                        '${documentIDs[index]} deleted')
+                                    : '';
                                 setState(() {});
                               },
                               child: const Icon(Icons.delete),

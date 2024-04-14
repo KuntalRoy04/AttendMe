@@ -25,8 +25,8 @@ class _AttendanceInputState extends State<AttendanceInput> {
     final qrCode = await FlutterBarcodeScanner.scanBarcode('#1C5D99', 'Cancel', false, ScanMode.QR);
     scannedCode = qrCode.toString();
     String? roll = await getRoll();
-    // final bool developerMode = await FlutterJailbreakDetection.developerMode;
-    final bool developerMode = await Future.value(false);
+    final bool developerMode = await FlutterJailbreakDetection.developerMode;
+    // final bool developerMode = await Future.value(false);
     context.mounted?await submitAttendance(
         context, roll!, scannedCode!, developerMode):'';
   }
@@ -125,7 +125,7 @@ class _AttendanceInputState extends State<AttendanceInput> {
                       DateTime loginTime =
                           DateTime.fromMillisecondsSinceEpoch(loginTimestamp);
                       DateTime currentTime = DateTime.now();
-                      if (currentTime.difference(loginTime).inHours <= 1) {
+                      if (currentTime.difference(loginTime).inHours >= 1) {
                         scanQr();
                       }
                       else {

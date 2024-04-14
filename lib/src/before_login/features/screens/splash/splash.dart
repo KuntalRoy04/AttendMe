@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget{
                   children: [
                     Padding(
                       padding: EdgeInsets.only(bottom: 100.0),
-                      child: Text("Developed by Saikat", style: TextStyle(color: Colors.black),),
+                      child: Text("Developed by Group 34", style: TextStyle(color: Colors.black),),
                     ),
                   ],
                 ),
