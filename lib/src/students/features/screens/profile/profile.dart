@@ -1,7 +1,5 @@
-import 'package:Attendme/src/before_login/constants/image_strings/image_strings.dart';
 import 'package:Attendme/src/students/common_functions/get_user_locally.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

@@ -156,7 +156,7 @@ class _FAttendanceDataScreenState extends State<FAttendanceDataScreen> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 List<String> documentIDs = snapshot.data ?? [];
-                return Container(
+                return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.4,
                   child: ListView.builder(
                     itemCount: documentIDs.length,

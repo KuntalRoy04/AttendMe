@@ -9,7 +9,6 @@ import '../constants/image_strings/image_strings.dart';
 import '../constants/text_strings/text_strings.dart';
 
 class StudentSignUpPage extends StatefulWidget {
-
   const StudentSignUpPage({super.key});
 
   @override
@@ -21,7 +20,8 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
 
   final TextEditingController rollController = TextEditingController();
 
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
 
@@ -63,7 +63,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                         children: [
                           Text(
                             studentSignUp,
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(color: const Color(0xFF1C5D99)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(color: const Color(0xFF1C5D99)),
                           ),
                           Text(
                             "Welcome Back",
@@ -84,7 +87,8 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       Expanded(
                         child: TextField(
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[a-zA-Z]')),
                           ],
                           controller: firstNameController,
                           decoration: const InputDecoration(
@@ -97,7 +101,8 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       Expanded(
                         child: TextField(
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[a-zA-Z]')),
                           ],
                           controller: lastNameController,
                           decoration: const InputDecoration(
@@ -133,7 +138,8 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                           keyboardType: TextInputType.number,
                           enableInteractiveSelection: false,
                           inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.deny(RegExp(r"[ ]")), // Disallow pasting any characters
+                            FilteringTextInputFormatter.deny(RegExp(
+                                r"[ ]")), // Disallow pasting any characters
                           ],
                           decoration: const InputDecoration(
                             labelText: "Class Roll",
@@ -165,8 +171,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                           DropdownMenuItem(value: "cst", child: Text("CST")),
                           DropdownMenuItem(value: "csit", child: Text("CS-IT")),
                           DropdownMenuItem(value: "cse", child: Text("CSE")),
-                          DropdownMenuItem(value: "cseaiml", child: Text("CSE-AIML")),
-                          DropdownMenuItem(value: "cseiot", child: Text("CSE-IOT")),
+                          DropdownMenuItem(
+                              value: "cseaiml", child: Text("CSE-AIML")),
+                          DropdownMenuItem(
+                              value: "cseiot", child: Text("CSE-IOT")),
                         ],
                       ),
                       const SizedBox(
@@ -199,12 +207,13 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   TextField(
                     controller: emailController,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@_.]'))
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z0-9@_.]'))
                     ],
                     decoration: const InputDecoration(
                         labelText: 'Email',
-                        prefixIcon: Icon(Icons.email, color: Color(0xFF1C5D99))
-                    ),
+                        prefixIcon:
+                            Icon(Icons.email, color: Color(0xFF1C5D99))),
                   ),
                   const SizedBox(
                     height: 20,
@@ -217,9 +226,9 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       FilteringTextInputFormatter.digitsOnly,
                     ],
                     decoration: const InputDecoration(
-                      labelText: 'Enrolment number',
-                        prefixIcon: Icon(Icons.perm_identity, color: Color(0xFF1C5D99))
-                    ),
+                        labelText: 'Enrolment number',
+                        prefixIcon: Icon(Icons.perm_identity,
+                            color: Color(0xFF1C5D99))),
                   ),
                   const SizedBox(
                     height: 20,
@@ -227,9 +236,9 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   TextField(
                     controller: passwordController,
                     decoration: const InputDecoration(
-                      labelText: "Password",
-                        prefixIcon: Icon(Icons.password, color: Color(0xFF1C5D99))
-                    ),
+                        labelText: "Password",
+                        prefixIcon:
+                            Icon(Icons.password, color: Color(0xFF1C5D99))),
                   ),
                   const SizedBox(
                     height: 20,
@@ -237,9 +246,9 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   TextField(
                     controller: confirmPasswordController,
                     decoration: const InputDecoration(
-                      labelText: "Confirm Password",
-                        prefixIcon: Icon(Icons.password,color: Color(0xFF1C5D99))
-                    ),
+                        labelText: "Confirm Password",
+                        prefixIcon:
+                            Icon(Icons.password, color: Color(0xFF1C5D99))),
                   ),
                   const SizedBox(
                     height: 20,
@@ -260,11 +269,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                                   sectionValue!)
                               ? (!context.mounted)
                                   ? ''
-                                  : Navigator.pushNamedAndRemoveUntil(
-                                      context, 'navigationStudent', (route) => false)
+                                  : Navigator.pushNamedAndRemoveUntil(context,
+                                      'navigationStudent', (route) => false)
                               : dangerToast(context, "Something went wrong!");
-                        }
-                        else{
+                        } else {
                           Fluttertoast.showToast(
                             msg: "Password not matched",
                             toastLength: Toast.LENGTH_SHORT,

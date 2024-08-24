@@ -19,7 +19,7 @@ class FSettingsScreen extends StatelessWidget{
                       SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.setBool('isFacultyLoggedIn', false);
                       Navigator.pushNamed(context, 'loginDashboard');
-                  }, child: Text("Logout")),
+                  }, child: const Text("Logout")),
               ],
             ),
           )
